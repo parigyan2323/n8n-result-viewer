@@ -3,33 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>n8n Search Results</title>
+  <title>n8n Result Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    pre { background: #f4f4f4; padding: 15px; border-radius: 5px; }
+  </style>
 </head>
 <body>
-  <h1>Latest Search Results</h1>
-  <div id="results">
-    Loading results...
-  </div>
+  <h1>n8n Result Viewer</h1>
+  <div id="content">Loading...</div>
 
   <script>
-    fetch("data.json")
+    fetch('https://raw.githubusercontent.com/parigyan2323/n8n-result-viewer/main/output.json')
       .then(response => response.json())
       .then(data => {
-        const container = document.getElementById("results");
-        container.innerHTML = "";
-
-        if (data.items && data.items.length > 0) {
-          data.items.forEach(item => {
-            const link = document.createElement("a");
-            link.href = item.link;
-            link.textContent = item.title;
-            link.target = "_blank";
-            container.appendChild(link);
-            container.appendChild(document.createElement("br"));
-          });
-        } else {
-          container.textContent = "No results found.";
-        }
+        document.getElementById('content').innerHTML =
+          `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+      })
+      .catch(error => {
+        document.getElementById('content').innerHTML = 'Failed to load data: ' + error;
       });
   </script>
 </body>
