@@ -1,28 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>n8n Result Viewer</title>
+  <title>n8n Results Viewer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      background: #f4f4f4;
     }
     pre {
-      background: #fff;
+      background: #f4f4f4;
       padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      overflow-x: auto;
-    }
-    h1 {
-      color: #333;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>n8n Output Viewer</h1>
+  <h1>n8n Result Viewer</h1>
   <pre id="output">Loading...</pre>
 
   <script>
@@ -32,7 +26,7 @@
         document.getElementById('output').textContent = JSON.stringify(data, null, 2);
       })
       .catch(error => {
-        document.getElementById('output').textContent = '❌ Failed to load data: ' + error;
+        document.getElementById('output').textContent = 'Failed to load data: ' + error;
       });
   </script>
 </body>
