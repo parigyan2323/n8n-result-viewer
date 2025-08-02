@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>n8n Search Results</title>
+</head>
+<body>
+  <h1>Latest Search Results</h1>
+  <div id="results">
+    Loading results...
+  </div>
+
+  <script>
+    fetch("data.json")
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("results");
+        container.innerHTML = "";
+
+        if (data.items && data.items.length > 0) {
+          data.items.forEach(item => {
+            const link = document.createElement("a");
+            link.href = item.link;
+            link.textContent = item.title;
+            link.target = "_blank";
+            container.appendChild(link);
+            container.appendChild(document.createElement("br"));
+          });
+        } else {
+          container.textContent = "No results found.";
+        }
+      });
+  </script>
+</body>
+</html>
