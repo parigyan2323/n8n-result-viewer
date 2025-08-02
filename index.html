@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>n8n Result Viewer</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    pre { background: #f4f4f4; padding: 15px; border-radius: 5px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    pre {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow-x: auto;
+    }
+    h1 {
+      color: #333;
+    }
   </style>
 </head>
 <body>
-  <h1>n8n Result Viewer</h1>
-  <div id="content">Loading...</div>
+  <h1>n8n Output Viewer</h1>
+  <pre id="output">Loading...</pre>
 
   <script>
-    fetch('https://raw.githubusercontent.com/parigyan2323/n8n-result-viewer/main/output.json')
+    fetch('output.json')
       .then(response => response.json())
       .then(data => {
-        document.getElementById('content').innerHTML =
-          `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
       })
       .catch(error => {
-        document.getElementById('content').innerHTML = 'Failed to load data: ' + error;
+        document.getElementById('output').textContent = '❌ Failed to load data: ' + error;
       });
   </script>
 </body>
